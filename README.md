@@ -1,4 +1,4 @@
-## simple usage
+## simple usage on linux:
 ```bash
 docker run --rm -it -p 8000:8000 -v ${PWD}:/app itaru2622/fastapi:bullseye
 
@@ -7,7 +7,7 @@ pip3 install -r /app/requirements.txt
 uvicorn main:app 
 ```
 
-## other usage:
+## other usage on linux:
 you can:
 - set any uvicorn options by opts environment.
 - change requirement file path by py_requirements environment.

@@ -1,0 +1,65 @@
+name: CI testing under construction
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    paths-ignore:
+    - '**.md'
+    branches: [ master ]
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+    - '**.md'
+# schedule:
+#   - cron: '00 20 * * 0-5'
+  workflow_dispatch:
+
+env:
+  # Use docker.io for Docker Hub if empty
+  #REGISTRY: ghcr.io
+  REGISTRY: docker.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+  TAG_LATEST: bullseye
+  OPENAPI_PKG: tlgen
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: adjust image name from  ${{ github.repository }}
+        run: |
+           echo IMAGE_NAME=${{ env.IMAGE_NAME }} | sed 's/docker-//' >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+       # Generates a openapi.yaml file based on the FastAPI project.
+       # https://github.com/column-st/fastapi-openapi-specs-action
+      - name: Generate OpenAPI file
+        uses: column-street/fastapi-openapi-specs-action@v1.0.0
+        with:
+          moduleDir: app
+          fileName: main.py
+          appName: app
+          outputName: ${{ env.OPENAPI_PKG }}-openapi
+          fastapiVersioning: v1
+
+      - name: Generate Python Client
+        uses: openapi-generators/openapitools-generator-action@v1.4.0
+        with:
+          generator: python-nextgen
+          openapi-file:  ${{ env.OPENAPI_PKG }}-openapi.yaml
+          command-args: --package-name ${{ env.OPENAPI_PKG }} -o ${{ env.OPENAPI_PKG }}-client --generate-alias-as-model
+
+      - name: print all files (after codegen)
+        run: |
+           find . | grep -v /.git/ | xargs ls -lrtd
