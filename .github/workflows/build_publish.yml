@@ -26,6 +26,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   TAG_LATEST: bullseye
+  #BASE_IMG: debian:bullseye
+  BASE_IMG: python:3.10-bullseye
 
 jobs:
   build:
@@ -74,3 +76,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            base=${{env.BASE_IMG}}

@@ -1,4 +1,6 @@
-FROM debian:bullseye
+ARG base=debian:bullseye
+FROM ${base}
+ARG base
 
 RUN apt update; \
     apt install -y python3-pip bash-completion git make jq vim ;
