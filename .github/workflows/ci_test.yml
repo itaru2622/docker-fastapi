@@ -40,12 +40,12 @@ jobs:
         run: |
            echo IMAGE_NAME=${{ env.IMAGE_NAME }} | sed 's/docker-//' >> $GITHUB_ENV
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
        # Generates a openapi.yaml file based on the FastAPI project.
        # https://github.com/column-st/fastapi-openapi-specs-action
       - name: Generate OpenAPI file
-        uses: column-street/fastapi-openapi-specs-action@v1.0.0
+        uses: column-street/fastapi-openapi-specs-action@v1.0.1
         with:
           moduleDir: app
           fileName: main.py
