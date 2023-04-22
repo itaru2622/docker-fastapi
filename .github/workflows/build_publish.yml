@@ -27,7 +27,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   TAG_LATEST: bullseye
   #BASE_IMG: debian:bullseye
-  BASE_IMG: python:3.10-bullseye
+  BASE_IMG: python:3.11-bullseye
 
 jobs:
   build:
