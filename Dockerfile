@@ -14,7 +14,7 @@ RUN if [[ ${base} != python* ]] ; \
         apt install -y python3-pip; \
     fi
 
-RUN pip3 install fastapi[standard] uvicorn requests bs4 Jinja2   q yq pytest pytest-cov httpx
+RUN pip3 install fastapi[standard] uvicorn requests bs4 Jinja2 classy-fastapi   q yq pytest pytest-cov httpx
 RUN mkdir -p /app
 COPY ./start.sh /usr/local/bin/start.sh
 WORKDIR /app
