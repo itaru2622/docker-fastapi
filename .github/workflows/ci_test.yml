@@ -26,7 +26,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   TAG_LATEST: bullseye
-  OPENAPI_PKG: tlgen
+  OPENAPI_PKG: sample
+  MODULE_DIR:  samples.1simple
 
 jobs:
   build:
@@ -47,7 +48,7 @@ jobs:
       - name: Generate OpenAPI file
         uses: column-street/fastapi-openapi-specs-action@v1.0.1
         with:
-          moduleDir: app
+          moduleDir: ${{ env.MODULE_DIR }}
           fileName: main.py
           appName: app
           outputName: ${{ env.OPENAPI_PKG }}-openapi
