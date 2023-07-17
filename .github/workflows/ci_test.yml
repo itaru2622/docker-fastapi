@@ -55,7 +55,7 @@ jobs:
           fastapiVersioning: v1
 
       - name: Generate Python Client
-        uses: openapi-generators/openapitools-generator-action@v1.4.0
+        uses: openapi-generators/openapitools-generator-action@v1.5.0
         with:
           generator: python-nextgen
           openapi-file:  ${{ env.OPENAPI_PKG }}-openapi.yaml
