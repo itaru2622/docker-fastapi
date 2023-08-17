@@ -46,7 +46,7 @@ jobs:
        # Generates a openapi.yaml file based on the FastAPI project.
        # https://github.com/column-st/fastapi-openapi-specs-action
       - name: Generate OpenAPI file
-        uses: column-street/fastapi-openapi-specs-action@v1.0.1
+        uses: column-street/fastapi-openapi-specs-action@v1.0.2
         with:
           moduleDir: ${{ env.MODULE_DIR }}
           fileName: main.py
@@ -55,9 +55,9 @@ jobs:
           fastapiVersioning: v1
 
       - name: Generate Python Client
-        uses: openapi-generators/openapitools-generator-action@v1.4.0
+        uses: openapi-generators/openapitools-generator-action@v1.5.0
         with:
-          generator: python-nextgen
+          generator: python
           openapi-file:  ${{ env.OPENAPI_PKG }}-openapi.yaml
           command-args: --package-name ${{ env.OPENAPI_PKG }} -o ${{ env.OPENAPI_PKG }}-client --generate-alias-as-model
 
