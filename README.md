@@ -13,7 +13,7 @@ you can:
 - change requirement file path by py_requirements environment.
 - change app name by app environment according to your implementation
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:${PWD} -w ${PWD} -e py_requirements=/app/requirements.txt  -e app=main:app -e opts='--host 0.0.0.0 --reload' itaru2622/fastapi:bookworm
+docker run --rm -it -p 8000:8000 -v ${PWD}:${PWD} -w ${PWD} -e py_requirements=${PWD}/requirements.txt  -e app=main:app -e opts='--host 0.0.0.0 --reload --reload-include "*.py" --reload-include "*.conf"' itaru2622/fastapi:bookworm
 # the above cmd start docker container  with:
 pip3 install -r /app/requirements.txt
 uvicorn --host 0.0.0.0 --reload main:app

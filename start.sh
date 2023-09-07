@@ -8,4 +8,4 @@ elif [ -r "${py_requirements}" ]; then
 fi
 
 echo "starting fastapi with: uvicorn ${opts} ${app}"
-uvicorn ${opts} ${app}
+/usr/bin/bash -c "uvicorn ${opts} ${app}"
