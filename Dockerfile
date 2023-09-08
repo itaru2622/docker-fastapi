@@ -15,7 +15,7 @@ RUN if [[ ${base} != python* ]] ; \
     fi
 
 RUN pip3 install install fastapi[standard] uvicorn[standard] requests bs4 Jinja2 q yq pytest pytest-cov httpx
-RUN mkdir -p /app
+RUN mkdir -p /app;    echo "set mouse-=a" > /root/.vimrc;
 COPY ./start.sh /usr/local/bin/start.sh
 WORKDIR /app
 ENV py_requirements=./requirements.txt
