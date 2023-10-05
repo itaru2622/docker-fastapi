@@ -1,4 +1,4 @@
-ARG base=debian:bullseye
+ARG base=python:3-bookworm
 FROM ${base}
 ARG base
 
@@ -14,7 +14,8 @@ RUN if [[ ${base} != python* ]] ; \
         apt install -y python3-pip; \
     fi
 
-RUN pip3 install install fastapi[standard] uvicorn[standard] requests bs4 Jinja2 q yq pytest pytest-cov httpx
+RUN pip3 install -U setuptools pip; \
+    pip3 install fastapi[standard] uvicorn watchfiles requests bs4 Jinja2 q yq pytest pytest-cov httpx
 RUN mkdir -p /app;    echo "set mouse-=a" > /root/.vimrc;
 COPY ./start.sh /usr/local/bin/start.sh
 WORKDIR /app
