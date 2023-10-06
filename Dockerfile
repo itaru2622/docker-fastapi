@@ -20,6 +20,7 @@ RUN mkdir -p /app;    echo "set mouse-=a" > /root/.vimrc;
 COPY ./start.sh /usr/local/bin/start.sh
 WORKDIR /app
 ENV py_requirements=./requirements.txt
+ENV apt_requirements=./requirements-apt.txt
 ENV app=main:app
 ENV opts=''
 CMD /usr/local/bin/start.sh
