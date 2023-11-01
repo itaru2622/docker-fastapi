@@ -11,14 +11,18 @@ uvicorn main:app
 ## other usage on linux:
 you can:
 - set any uvicorn options by opts environment variable.
+- change app name by app environment according to your implementation
 - change requirement file path for apt install by apt_requirements environment variable.
 - change requirement file path for pip install by py_requirements  environment variable.
-- change app name by app environment according to your implementation
+- change upgrade strategy      for pip install by pip_install_opt  environment variable.
+
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:${PWD} -w ${PWD} -e py_requirements=${PWD}/requirements.txt -e apt_requirements=${PWD}/requirements-apt.txt -e app=main:app -e opts='--host 0.0.0.0 --reload --reload-include "*.py" --reload-include "*.conf"' itaru2622/fastapi:bookworm
+docker run --rm -it -p 8000:8000 -v ${PWD}:${PWD} -w ${PWD} -e py_requirements=${PWD}/requirements.txt -e pip_install_opt='--upgrade --upgrade-strategy eager' -e apt_requirements=${PWD}/requirements-apt.txt -e app=main:app -e opts='--host 0.0.0.0 --reload --reload-include "*.py" --reload-include "*.conf"' itaru2622/fastapi:bookworm
+#
 # the above cmd start docker container  with:
+#
 apt  install -y ${apt_requirements}
-pip3 install -r ${py_requirements}
+pip3 install -r ${py_requirements} ${pip_install_opt}
 uvicorn ${opts} ${app}
 ```
 
