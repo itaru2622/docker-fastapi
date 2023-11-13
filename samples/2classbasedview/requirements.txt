@@ -1,2 +1,3 @@
 fastapi
 classy-fastapi
+pydantic<2
