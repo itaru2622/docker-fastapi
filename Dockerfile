@@ -23,5 +23,5 @@ ENV py_requirements=./requirements.txt
 ENV apt_requirements=./requirements-apt.txt
 ENV app=main:app
 ENV opts=''
-ENV PATH=.:${PATH}
+ENV PATH=./:./bin:${PATH}
 CMD start.sh
