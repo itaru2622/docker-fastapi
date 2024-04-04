@@ -18,6 +18,7 @@ RUN pip3 install -U setuptools pip; \
     pip3 install fastapi[standard] uvicorn watchfiles requests bs4 Jinja2 q yq pytest pytest-cov httpx
 RUN mkdir -p /app;    echo "set mouse-=a" > /root/.vimrc;
 COPY ./start.sh /usr/local/bin/start.sh
+COPY ./samples /opt/fastapi-samples
 WORKDIR /app
 ENV py_requirements=./requirements.txt
 ENV apt_requirements=./requirements-apt.txt
