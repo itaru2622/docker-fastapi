@@ -27,5 +27,8 @@ async def catch_websocket(ws:WebSocket, full_path: str):
     input = { "full_path": full_path, "query": dict(ws._query_params), "headers": dict(ws._headers) }
     await ws.send_text(f'new websocket connection: {input}')
     while True:
-        msg = await ws.receive_text()
-        await ws.send_text(f'got: {msg}')
+       try:
+          msg = await ws.receive_text()
+          await ws.send_text(f'got: {msg}')
+       except:
+          break
