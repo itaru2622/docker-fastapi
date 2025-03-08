@@ -1,11 +1,21 @@
 ## simple usage on linux:
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/app itaru2622/fastapi:bookworm
+make start
 
+# or
+
+docker run --rm -it -p 8000:8000 -v ${PWD}:${PWD} -w ${PWD} itaru2622/fastapi:bookworm
 # the above cmd start docker container  with:
-apt  install -y /app/requirements-apt.txt
-pip3 install -r /app/requirements.txt
+apt  install -y ${PWD}/requirements-apt.txt
+pip3 install -r ${PWD}/requirements.txt
 uvicorn main:app 
+```
+
+## test and play with embeded sample(/3catchall):
+
+```bash
+make test
+# then, access http://localhost:8000/docs for swagger UI
 ```
 
 ## other usage on linux:
@@ -29,5 +39,7 @@ uvicorn ${opts} ${app}
 
 ## build docker image
 ```bash
+make build
+# or
 docker build --build-arg base=python:3-bookworm --build-arg http_proxy=${http_proxy} --build-arg https_proxy=${https_proxy} -t itaru2622/fastapi:bookworm .
 ```
