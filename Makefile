@@ -1,5 +1,5 @@
-img  ?=itaru2622/fastapi:bookworm
-base ?=python:3.12-bookworm
+img  ?=itaru2622/fastapi:trixie
+base ?=python:3.13-trixie
 
 port ?=8000
 sDir ?=/opt/fastapi-samples/3catchall
