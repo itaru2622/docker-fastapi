@@ -41,7 +41,7 @@ jobs:
         run: |
            echo IMAGE_NAME=${{ env.IMAGE_NAME }} | sed 's/docker-//' >> $GITHUB_ENV
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
        # Generates a openapi.yaml file based on the FastAPI project.
        # https://github.com/column-st/fastapi-openapi-specs-action
