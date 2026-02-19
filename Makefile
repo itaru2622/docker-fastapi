@@ -1,5 +1,5 @@
 img  ?=itaru2622/fastapi:trixie
-base ?=python:3.13-trixie
+base ?=python:3.14-trixie
 
 port ?=8000
 sDir ?=/opt/fastapi-samples/3catchall
