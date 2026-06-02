@@ -1,9 +1,19 @@
 # cf. https://stackoverflow.com/questions/63069190/how-to-capture-arbitrary-paths-at-one-route-in-fastapi
 
-from fastapi import FastAPI, Request, WebSocket
+from fastapi import FastAPI, Request, WebSocket, UploadFile, File
+from typing import Annotated
 import json
 
 app = FastAPI()
+
+@app.post("/upload")
+async def upload(file: UploadFile = File(...) ):
+    print(f"Content-Type: {file.content_type}")
+    contents = await file.read()
+    return {"filename": file.filename,
+            "content-type": file.content_type,
+            "size": file.size
+           }
 
 @app.get    ("{full_path:path}")
 @app.put    ("{full_path:path}")
