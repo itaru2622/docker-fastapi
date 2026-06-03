@@ -1,10 +1,34 @@
 # cf. https://stackoverflow.com/questions/63069190/how-to-capture-arbitrary-paths-at-one-route-in-fastapi
 
-from fastapi import FastAPI, Request, WebSocket, UploadFile, File
-from typing import Annotated
+from fastapi import FastAPI, Request, WebSocket, UploadFile, File, Header, Body
+from typing import Annotated, Any
 import json
 
 app = FastAPI()
+
+@app.post("/anycontent")
+async def anyContent(req: Request,
+    content_type: str        = Header(description="Content-Type"),
+    body:         Any|None   = Body(description="Content"),
+    x_filename:   str|None   = Header(None, description="Name of Content(filename)"),
+    ):
+
+#   Example handling for common content types
+#   ctype = req.headers.get("content-type", "application/octet-stream")
+#   if "application/json" in ctype:
+#       data = await req.json()
+#   elif "text/" in ctype:
+#       data = (await req.body()).decode("utf-8")
+#   else:
+#       data = await req.body()
+
+    return {
+            "Content-Type":   content_type,
+            "Content-Length": int( req.headers.get("content-length", 0)),
+            "type(body)":     type(body).__name__,
+            "x-file-name":    x_filename,
+           }
+
 
 @app.post("/upload")
 async def upload(file: UploadFile = File(...) ):
